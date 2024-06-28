@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import styles from "./homepage.module.css";
 import Featured from "@/components/featured/Featured";
@@ -13,7 +14,7 @@ export default function Home({ searchParams }) {
       <Featured />
       <CategoryList />
       <div className={styles.content}>
-        <CardList page={page}/>
+        <CardList page={page} />
         <Menu />
       </div>
     </div>

@@ -1,5 +1,5 @@
 "use client";
-
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./writePage.module.css";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
+const DynamicReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const WritePage = () => {
   const { status } = useSession();
@@ -103,7 +103,10 @@ const WritePage = () => {
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+      <select
+        className={styles.select}
+        onChange={(e) => setCatSlug(e.target.value)}
+      >
         <option value="style">style</option>
         <option value="fashion">fashion</option>
         <option value="food">food</option>
@@ -136,7 +139,7 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
+        <DynamicReactQuill
           className={styles.textArea}
           theme="bubble"
           value={value}
